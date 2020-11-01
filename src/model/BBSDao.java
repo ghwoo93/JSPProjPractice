@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.servlet.ServletContext;
@@ -85,32 +86,37 @@ public class BBSDao {
 		return flag;
 	}
 	
-	public List<BBSDto> selectBBSList(){
+	public List<BBSDto> selectBBSList(Map<String,String> map){
 		List<BBSDto> list = new Vector<BBSDto>();
-		String sql = 
-			"SELECT b.*,m.name FROM bbs b JOIN member m ON b.id=m.id "
-			+ "ORDER BY no DESC";
+		//페이징 적용 前 쿼리- 전체 쿼리
+		//String sql="SELECT b.*,name FROM bbs b JOIN member m ON b.id=m.id ORDER BY no DESC";
+		//페이징 적용-구간쿼리로 변경
+		String sql="SELECT * FROM (SELECT T.*,ROWNUM R FROM "
+				+ "(SELECT b.*,name FROM bbs b "
+				+ "JOIN member m ON b.id=m.id ORDER BY no DESC) T) "
+				+ "WHERE R BETWEEN ? AND ?";
 		try {
 			psmt = conn.prepareStatement(sql);
+			
+			//페이징을 위한 시작 및 종료 rownum설정]
+			psmt.setString(1, map.get("start").toString());
+			psmt.setString(2, map.get("end").toString());
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				BBSDto dto = new BBSDto();
-				dto.setNo(rs.getString(1));
+				dto.setContent(rs.getString(4));
 				dto.setId(rs.getString(2));
-				dto.setTitle(rs.getString(3));
-				dto.setContent(rs.getString(4));	
-				dto.setVisitCount(rs.getString(5));
+				dto.setNo(rs.getString(1));
 				dto.setPostDate(rs.getDate(6));
+				dto.setTitle(rs.getString(3));
+				dto.setVisitCount(rs.getString(5));
 				dto.setName(rs.getString(7));
 				list.add(dto);
 			}
-		} catch (SQLException e) {
-			System.out.println("검색오류:"+e.getMessage());
-		} finally {
-			close();
 		}
+		catch(SQLException e) {e.printStackTrace();}
 		return list;
-	}
+	}///////////selectList
 	
 	public BBSDto selectBBSOne(String no) {
 		BBSDto dto = null;

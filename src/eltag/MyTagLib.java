@@ -1,6 +1,15 @@
 package eltag;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
+
 import common.utility.CommonUtilities;
+import model.BBSDao;
+import model.BBSDto;
+import model.MemberDTO;
 
 public class MyTagLib {
 	public static boolean isNumber(String value) {
@@ -35,5 +44,14 @@ public class MyTagLib {
 			case 8: return "외국인 여성입니다";
 			default: return "유효하지 않은 주민번호입니다.";
 		}
+	}
+	
+	public static List<BBSDto> selectList(
+			ServletContext context,String start,String end){
+		BBSDao dao = new BBSDao(context, "JSP", "JSP");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("start", start);
+		map.put("end", end);
+		return dao.selectBBSList(map);
 	}
 }

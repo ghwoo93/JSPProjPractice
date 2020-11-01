@@ -5,6 +5,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,29 +25,46 @@
 			String[] colors = { "red", "green", "blue", "#9944a5" };
 		%>
 		<h2>자바코드로 배열 출력</h2>
+		<% for(String color:colors) { %>
+			<%=color.toString() %>
+		<% } %>
 		<h2>EL 및 JSTL로 배열 출력</h2>
+		<c:set var="colors" value="<%=colors %>"/>
+		<c:forEach var="color" items="${colors }">
+			<h4 style='color:${color}'>${color }</h4>
+		</c:forEach>
 		<h2>varStatus속성</h2>
 		<h2>리스트 계열 컬렉션</h2>
 		<%
 			//데이타 준비]
-		List list = new Vector();
+		List<MemberDTO> list = new Vector<MemberDTO>();
 		list.add(new MemberDTO("KIM", "1234", "김길동", null, null));
 		list.add(new MemberDTO("LEE", "1234", "이길동", null, null));
 		list.add(new MemberDTO("PARK", "1234", "박길동", null, null));
 		%>
+		<c:set var="list" value="<%=list %>"/>
 		<h4>일반 for문 형태의 forEach태그로 출력</h4>
+		<c:forEach begin="0" end="${list.size() }" var="i">
+			${list[i] }<br/>
+		</c:forEach>
 		<h4>확장 for문 형태의 forEach태그로 출력</h4>
+		<c:forEach var="item" items="${list }">
+			${item }<br/>
+		</c:forEach>
 		<h2>맵계열 컬렉션</h2>
 		<%
 			//데이타 준비
-		Map map = new HashMap();
+		Map<String,MemberDTO> map = new HashMap<String,MemberDTO>();
 		map.put("first", list.get(0));
 		map.put("second", list.get(1));
 		map.put("third", list.get(2));
 		%>
+		<c:set var="map" value="<%=map %>"/>
 		<h4>키값을 알때 :el변수.키값 혹은 el변수["키값"]</h4>
 		<ul>
-
+			<li>${map.first }</li>
+			<li>${map.second }</li>
+			<li>${map.third }</li>
 		</ul>
 		<h4>키값을 모를때</h4>
 		<!-- 
@@ -54,7 +72,9 @@
 		      VALUE값 얻기: var속성에 지정한 \${EL변수명.value}
 		-->
 		<ul>
-
+			<c:forEach var="item" items="${map }">
+				<li>${item.key }:${item.value }</li>
+			</c:forEach>
 		</ul>
 	</fieldset>
 	<!-- 
@@ -73,12 +93,14 @@
 				<th style="width: 15%">작성자</th>
 				<th style="width: 15%">작성일</th>
 			</tr>
+				<c:forEach var="" items="${ }">
 				<tr style="background-color: white; text-align: center">
 					<td></td>
 					<td style="text-align: left"></td>
 					<td></td>
 					<td></td>
 				</tr>
+				</c:forEach>
 		</table>
 	</fieldset>
 </body>
