@@ -9,7 +9,6 @@ import javax.servlet.ServletContext;
 import common.utility.CommonUtilities;
 import model.BBSDao;
 import model.BBSDto;
-import model.MemberDTO;
 
 public class MyTagLib {
 	public static boolean isNumber(String value) {
@@ -53,5 +52,11 @@ public class MyTagLib {
 		map.put("start", start);
 		map.put("end", end);
 		return dao.selectBBSList(map);
+	}
+	
+	public static boolean isMember(
+			ServletContext context,String user,String password) {
+		BBSDao dao = new BBSDao(context, "JSP", "JSP");
+		return dao.isMember(user, password);
 	}
 }

@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/WEB-INF/tlds/mytag.tld" prefix="my" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,12 +94,12 @@
 				<th style="width: 15%">작성자</th>
 				<th style="width: 15%">작성일</th>
 			</tr>
-				<c:forEach var="" items="${ }">
+				<c:forEach var="item" items='${my:selectList(pageContext.servletContext,"1","10") }'>
 				<tr style="background-color: white; text-align: center">
-					<td></td>
-					<td style="text-align: left"></td>
-					<td></td>
-					<td></td>
+					<td>${item.no }</td>
+					<td style="text-align: left">${item.title }</td>
+					<td>${item.name }</td>
+					<td>${item.postDate }</td>
 				</tr>
 				</c:forEach>
 		</table>
