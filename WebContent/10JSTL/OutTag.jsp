@@ -27,9 +27,8 @@
 		 <h3>빈 문자열인 경우:값이 없는경우</h3>
 		 <c:out value="${param.name }" default="NULL이다."/>
 		 <h3>페이지 링크에 응용</h3>
-		 <c:url value="/BBS08/List.jsp?nowPage="/>
-		 <c:out value="${param.nowPage }" default="1"/>
-		 <a href='<c:url value="/BBS08/List.jsp?nowPage="/><c:out value="${param.nowPage }" default="1"/>'>리스트</a>
+		 <c:url value="/08BBS/List.jsp?nowPage=" var="listUrl"/>
+		 <a href='${listUrl }<c:out value="${param.nowPage }" default="1" />'>리스트</a>
 	</fieldset>
 </body>
 </html>

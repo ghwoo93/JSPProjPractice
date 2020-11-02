@@ -15,13 +15,13 @@
 			-var속성 미 지정시에는 해당 위치에 url이 출력된다.
 		 -->
 		 <h2>var속성 미 지정</h2>
-		 <c:url value="/JSTL10/ImportedPage.jsp">
+		 <c:url value="/10JSTL/ImportedPage.jsp">
 		 	<c:param name="user" value="KIM"/>
 		 	<c:param name="pass" value="1234"/>
 		 </c:url>
 		 
 		 <h2>var속성 지정</h2>
-		 <c:url value="/JSTL10/ImportedPage.jsp" var="url">
+		 <c:url value="/10JSTL/ImportedPage.jsp" var="url">
 		 	<c:param name="user" value="KIM"/>
 		 	<c:param name="pass" value="1234"/>
 		 </c:url>
@@ -29,7 +29,7 @@
 		 <h2>내가 원하는 위치에서 URL사용</h2>
 		 <a href="${url }">링크페이지</a>
 		 <h2>HTML태그안에서 JSTL로 절대경로 지정</h2>
-		 <a href="<c:url value='/JSTL10/ImportedPage.jsp?user=KIMMMM&pass=1255534'/>">ImportedPage</a>
+		 <a href="<c:url value='/10JSTL/ImportedPage.jsp?user=KIMMMM&pass=1255534'/>">ImportedPage</a>
 	</fieldset>
 </body>
 </html>
