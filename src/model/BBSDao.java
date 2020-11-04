@@ -86,6 +86,33 @@ public class BBSDao {
 		return flag;
 	}
 	
+	public List<BBSDto> selectBBSList(){
+		List<BBSDto> list = new Vector<BBSDto>();
+		//페이징 적용 前 쿼리- 전체 쿼리
+		//String sql="SELECT b.*,name FROM bbs b JOIN member m ON b.id=m.id ORDER BY no DESC";
+		//페이징 적용-구간쿼리로 변경
+		String sql="SELECT b.*,name FROM bbs b JOIN member m ON b.id=m.id ORDER BY no DESC";
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			//페이징을 위한 시작 및 종료 rownum설정]
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				BBSDto dto = new BBSDto();
+				dto.setContent(rs.getString(4));
+				dto.setId(rs.getString(2));
+				dto.setNo(rs.getString(1));
+				dto.setPostDate(rs.getDate(6));
+				dto.setTitle(rs.getString(3));
+				dto.setVisitCount(rs.getString(5));
+				dto.setName(rs.getString(7));
+				list.add(dto);
+			}
+		}
+		catch(SQLException e) {e.printStackTrace();}
+		return list;
+	}
+	
 	public List<BBSDto> selectBBSList(Map<String,String> map){
 		List<BBSDto> list = new Vector<BBSDto>();
 		//페이징 적용 前 쿼리- 전체 쿼리

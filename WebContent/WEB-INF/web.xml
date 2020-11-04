@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>JSPProjPractice</display-name>
+  <!-- 세션의 유효시간 설정(분단위) -->
   <session-config>
     <session-timeout>60</session-timeout>
   </session-config>
+  
+  <!-- 컨텍스트 초기화 파라미터 목록 -->
+   <context-param>
+    <param-name>ORACLE_URL</param-name>
+    <param-value>jdbc:oracle:thin:@localhost:1521:orcl</param-value>
+  </context-param>
+  <context-param>
+    <param-name>ORACLE_DRIVER</param-name>
+    <param-value>oracle.jdbc.OracleDriver</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>JNDI_ROOT</param-name>
+  	<param-value>java:comp/env</param-value>
+  </context-param>
+  
+  <!-- 나만의 태그 라이브러리를 사용하기 위한 설정 -->
+  <jsp-config>
+  	<taglib>
+  		<taglib-uri>WEB-INF/tlds/mytag.tld</taglib-uri>
+  		<taglib-location>WEB-INF/tlds/mytag.tld</taglib-location>
+  	</taglib>
+  </jsp-config>
+  
   <servlet>
     <servlet-name>SEVLET_HELLO</servlet-name>
     <servlet-class>controller.HelloServlet</servlet-class>
@@ -28,14 +52,7 @@
     <servlet-name>CONTENT_TYPE</servlet-name>
     <url-pattern>/AniDir/SomeDir/SetContentType.kosmo</url-pattern>
   </servlet-mapping>
-  <context-param>
-    <param-name>ORACLE_URL</param-name>
-    <param-value>jdbc:oracle:thin:@localhost:1521:orcl</param-value>
-  </context-param>
-  <context-param>
-    <param-name>ORACLE_DRIVER</param-name>
-    <param-value>oracle.jdbc.OracleDriver</param-value>
-  </context-param>
+ 
   <servlet>
     <servlet-name>APPLICATION_1_JSP</servlet-name>
     <jsp-file>/03InnerObject/Application_1.jsp</jsp-file>
@@ -48,13 +65,6 @@
     <servlet-name>APPLICATION_1_JSP</servlet-name>
     <url-pattern>/03InnerObject/Application_1.jsp</url-pattern>
   </servlet-mapping>
-  
-  <jsp-config>
-  	<taglib>
-  		<taglib-uri>WEB-INF/tlds/mytag.tld</taglib-uri>
-  		<taglib-location>WEB-INF/tlds/mytag.tld</taglib-location>
-  	</taglib>
-  </jsp-config>
   
   <welcome-file-list>
     <welcome-file>HelloWorld.jsp</welcome-file>
