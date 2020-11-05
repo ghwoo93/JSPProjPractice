@@ -66,11 +66,29 @@
     <url-pattern>/03InnerObject/Application_1.jsp</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>DataRoomIndex</servlet-name>
+  	<servlet-class>controller.dataroom.IndexController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>DataRoomIndex</servlet-name>
+  	<url-pattern>/DataRoom/Index.kosmo</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>DataRoomList</servlet-name>
+  	<servlet-class>controller.dataroom.ListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>DataRoomList</servlet-name>
+  	<url-pattern>/DataRoom/List.kosmo</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
     <welcome-file>HelloWorld.jsp</welcome-file>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>

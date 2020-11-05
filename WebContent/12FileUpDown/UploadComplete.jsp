@@ -92,7 +92,7 @@
 			<li>실제 서버에 저장된 파일명:<%=mr.getFilesystemName("attachedFile2") %></li>
 			<li>컨텐츠 타입:<%=mr.getContentType("attachedFile2") %></li>
 			<li>파일 크기:<%=(int)Math.ceil(file2.length()/1024.0) %>KB</li>
-			<li><img src="<c:url value='/Upload'/>/<%=file2.getName() %>/>" alt="이미지" style="width:200px;height:200px"/></li>
+			<li><img src="<c:url value='/Upload'/>/<%=file2.getName() %>" alt="이미지2" style="width:200px;height:200px"/></li>
 			<% %>
 		</ul>
 		
